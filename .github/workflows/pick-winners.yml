@@ -1,0 +1,34 @@
+name: Pick winners
+
+on:
+  workflow_dispatch:
+    inputs:
+      id:
+        description: 'ID of the giveaway'
+        required: true
+
+jobs:
+  pick-winners:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 23
+          cache: pnpm
+      - name: Install dependencies
+        run: pnpm install
+      - name: Pick winners
+        run: node .
+        env:
+          GIVEAWAY_ID: ${{ github.event.inputs.id }}
+          MONGO_APP_ID: ${{ secrets.MONGO_APP_ID }}
+          MONGO_APP_KEY: ${{ secrets.MONGO_APP_KEY }}
+          MONGO_DB: ${{ secrets.MONGO_DB }}
+          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}

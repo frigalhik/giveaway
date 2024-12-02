@@ -1,0 +1,12 @@
+{
+  "name": "@frigalhik/giveaway",
+  "main": "src/main.js",
+  "type": "module",
+  "dependencies": {
+    "@discordjs/rest": "^2.4.0",
+    "realm-web": "^2.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.1"
+  }
+}
