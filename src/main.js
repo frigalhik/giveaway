@@ -2,10 +2,10 @@ import { log, warn } from 'node:console'
 import { randomInt } from 'node:crypto'
 import { env } from 'node:process'
 import { getGiveaway } from './db.js'
-import { hasMember } from './discord.js'
+import { hasMember, sendMessage } from './discord.js'
 
 async function main() {
-  const { users, winners: numberOfWinners, guildId } = await getGiveaway(env.GIVEAWAY_ID)
+  const { users, winners: numberOfWinners, guildId, channelId } = await getGiveaway(env.GIVEAWAY_ID)
 
   log(`Participants (${users.length})`, users)
 
@@ -28,6 +28,13 @@ async function main() {
   }
 
   log(`Winners (${winners.length}/${numberOfWinners})`, winners)
+
+  await sendMessage(
+    channelId,
+    winners.length ?
+      `Победител${winners.length === 1 ? 'ь' : 'и'}: ${winners.map(id => `<@${id}>`).join(', ')}. Поздравляем!` :
+      'В розыгрыше никто не победил. Мило.',
+  )
 }
 
 await main()

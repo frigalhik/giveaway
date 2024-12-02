@@ -19,3 +19,7 @@ export async function hasMember(guildId, memberId) {
     }
   }
 }
+
+export async function sendMessage(channelId, content) {
+  return client.post(`/channels/${channelId}/messages`, { body: { content } })
+}
