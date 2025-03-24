@@ -1,2 +1,2 @@
 # Frigalhik Giveaway
-A repository for a transparent and honestly selection of giveaway winners!
+A repository for a transparent and honest selection of giveaway winners!
